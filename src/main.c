@@ -44,7 +44,7 @@
 
 /*----- Macros -------------------------------------------------------------*/
 #define INT_PER_SEC			1000U	/**< SysTick interrupts per second		*/
-#define WAIT_CYCLE			10		//Delay after every cycle
+//#define WAIT_CYCLE			10		//Delay after every cycle
 
 /*----- Data types ---------------------------------------------------------*/
 
