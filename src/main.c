@@ -41,6 +41,12 @@
 #include <stm32f4xx.h>				/* Processor STM32F407IG				*/
 #include <carme.h>					/* CARME Module							*/
 #include <stdbool.h>
+#include <lcd.h>
+#include <carme_io2.h>
+
+#include <stdio.h>
+#include <string.h>
+
 
 #include "define.h"
 /*----- Macros -------------------------------------------------------------*/
@@ -55,6 +61,7 @@ void TimingDelay_Decrement(void);
 int main(void);
 
 void myfunction ();
+int Carme_I01_Button_S0();
 
 /*----- Data ---------------------------------------------------------------*/
 static __IO uint32_t time_counter;
