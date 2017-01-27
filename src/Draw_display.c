@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 
-Draw_display(unsigned int ball_coordinate_x, unsigned int ball_coordinate_y,
+void Draw_display(unsigned int ball_coordinate_x, unsigned int ball_coordinate_y,
 		  unsigned int paddle_left_coordinate_x, unsigned int paddle_left_coordinate_y,
 		  unsigned int paddle_right_coordinate_x, unsigned int paddle_right_coordinate_y)
 		  {
@@ -34,7 +34,5 @@ Draw_display(unsigned int ball_coordinate_x, unsigned int ball_coordinate_y,
 				LCD_DrawRectF(paddle_right_coordinate_x, 0, 										  PADDLE_WIDTH, paddle_right_coordinate_y, 								   GUI_COLOR_BLACK); // overwrite from top to paddle
 				LCD_DrawRectF(paddle_right_coordinate_x, paddle_right_coordinate_y, 				  PADDLE_WIDTH, PADDLE_HEIGHT, 											   GUI_COLOR_YELLOW); //draw the paddle
 				LCD_DrawRectF(paddle_right_coordinate_x, paddle_right_coordinate_y + PADDLE_HEIGHT,   PADDLE_WIDTH, DISP_HEIGHT - (paddle_right_coordinate_y + PADDLE_HEIGHT), GUI_COLOR_BLACK); //overwrite from bottom of paddle to bottom of screen
-
-
 			}
 		  }

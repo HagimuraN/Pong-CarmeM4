@@ -49,6 +49,8 @@
 
 
 #include "define.h"
+#include "Draw_display.h"
+#include "game.h"
 /*----- Macros -------------------------------------------------------------*/
 #define INT_PER_SEC			1000U	/**< SysTick interrupts per second		*/
 //#define WAIT_CYCLE			10		//Delay after every cycle
@@ -127,7 +129,8 @@ int main(void) {
 		else{
 			gaming = Game(&ball_coordinate_x, &ball_coordinate_y,
 				 paddle_left_coordinate_x, paddle_left_coordinate_y,
-				 paddle_right_coordinate_x, paddle_right_coordinate_y);
+				 paddle_right_coordinate_x, paddle_right_coordinate_y,
+				 &point_player_r, &point_player_l);
 
 			if (gaming)
 			{

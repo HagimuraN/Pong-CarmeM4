@@ -156,10 +156,6 @@ Discarded input sections
  .text          0x00000000        0x0 src\main.o
  .data          0x00000000        0x0 src\main.o
  .bss           0x00000000        0x0 src\main.o
- .bss.point_player_r
-                0x00000000        0x1 src\main.o
- .bss.point_player_l
-                0x00000000        0x1 src\main.o
  .text          0x00000000        0x0 src\game.o
  .data          0x00000000        0x0 src\game.o
  .bss           0x00000000        0x0 src\game.o
@@ -808,7 +804,7 @@ LOAD ..\Libraries\libsGUI.a
                 0x08000000                g_pfnVectors
                 0x08000188                . = ALIGN (0x4)
 
-.text           0x08000188     0x1a44
+.text           0x08000188     0x1a48
                 0x08000188                . = ALIGN (0x4)
  *(.text)
  .text          0x08000188       0x40 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
@@ -948,175 +944,175 @@ LOAD ..\Libraries\libsGUI.a
  .text.SysTick_Handler
                 0x08000448       0x38 src\main.o
                 0x08000448                SysTick_Handler
- .text.main     0x08000480       0xd4 src\main.o
+ .text.main     0x08000480       0xdc src\main.o
                 0x08000480                main
- .text.Game     0x08000554       0x84 src\game.o
-                0x08000554                Game
+ .text.Game     0x0800055c       0x84 src\game.o
+                0x0800055c                Game
  .text.Move_Ball
-                0x080005d8      0x100 src\game.o
-                0x080005d8                Move_Ball
+                0x080005e0      0x100 src\game.o
+                0x080005e0                Move_Ball
  .text.Paddle_Bounce_Detection
-                0x080006d8       0xbc src\game.o
-                0x080006d8                Paddle_Bounce_Detection
+                0x080006e0       0xbc src\game.o
+                0x080006e0                Paddle_Bounce_Detection
  .text.Point_Detection
-                0x08000794       0x54 src\game.o
-                0x08000794                Point_Detection
+                0x0800079c       0x54 src\game.o
+                0x0800079c                Point_Detection
  .text.Change_Y_Velocity
-                0x080007e8       0x30 src\game.o
-                0x080007e8                Change_Y_Velocity
+                0x080007f0       0x30 src\game.o
+                0x080007f0                Change_Y_Velocity
  .text.Draw_display
-                0x08000818      0x110 src\Draw_display.o
-                0x08000818                Draw_display
+                0x08000820      0x10c src\Draw_display.o
+                0x08000820                Draw_display
  .text.__libc_init_array
-                0x08000928       0x4c c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/softfp\libc_nano.a(lib_a-init.o)
-                0x08000928                __libc_init_array
+                0x0800092c       0x4c c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/softfp\libc_nano.a(lib_a-init.o)
+                0x0800092c                __libc_init_array
  .text.CARME_CAN_Read_Register
-                0x08000974       0x30 ..\Libraries\libBSP.a(can.o)
+                0x08000978       0x30 ..\Libraries\libBSP.a(can.o)
  .text.CARME_CAN_Interrupt_Handler
-                0x080009a4       0xf8 ..\Libraries\libBSP.a(can.o)
-                0x080009a4                CARME_CAN_Interrupt_Handler
+                0x080009a8       0xf8 ..\Libraries\libBSP.a(can.o)
+                0x080009a8                CARME_CAN_Interrupt_Handler
  .text.CARME_Init
-                0x08000a9c       0xc0 ..\Libraries\libBSP.a(carme.o)
-                0x08000a9c                CARME_Init
+                0x08000aa0       0xc0 ..\Libraries\libBSP.a(carme.o)
+                0x08000aa0                CARME_Init
  .text.CARME_FSMC_GPIO_Init
-                0x08000b5c       0x54 ..\Libraries\libBSP.a(carme.o)
+                0x08000b60       0x54 ..\Libraries\libBSP.a(carme.o)
  .text.CARME_FSMC_Init
-                0x08000bb0      0x164 ..\Libraries\libBSP.a(carme.o)
+                0x08000bb4      0x164 ..\Libraries\libBSP.a(carme.o)
  .text.CARME_AGPIO_Init
-                0x08000d14       0x24 ..\Libraries\libBSP.a(carme.o)
+                0x08000d18       0x24 ..\Libraries\libBSP.a(carme.o)
  .text.CARME_GPIO_Init
-                0x08000d38      0x1f4 ..\Libraries\libBSP.a(carme.o)
-                0x08000d38                CARME_GPIO_Init
+                0x08000d3c      0x1f4 ..\Libraries\libBSP.a(carme.o)
+                0x08000d3c                CARME_GPIO_Init
  .text.SystemInit
-                0x08000f2c       0x68 ..\Libraries\libBSP.a(system_stm32f4xx.o)
-                0x08000f2c                SystemInit
+                0x08000f30       0x68 ..\Libraries\libBSP.a(system_stm32f4xx.o)
+                0x08000f30                SystemInit
  .text.SetSysClock
-                0x08000f94       0xf4 ..\Libraries\libBSP.a(system_stm32f4xx.o)
+                0x08000f98       0xf4 ..\Libraries\libBSP.a(system_stm32f4xx.o)
  .text.EXTI_GetITStatus
-                0x08001088       0x34 ..\Libraries\libBSP.a(stm32f4xx_exti.o)
-                0x08001088                EXTI_GetITStatus
+                0x0800108c       0x34 ..\Libraries\libBSP.a(stm32f4xx_exti.o)
+                0x0800108c                EXTI_GetITStatus
  .text.EXTI_ClearITPendingBit
-                0x080010bc       0x1c ..\Libraries\libBSP.a(stm32f4xx_exti.o)
-                0x080010bc                EXTI_ClearITPendingBit
+                0x080010c0       0x1c ..\Libraries\libBSP.a(stm32f4xx_exti.o)
+                0x080010c0                EXTI_ClearITPendingBit
  .text.FSMC_NORSRAMDeInit
-                0x080010d8       0x58 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
-                0x080010d8                FSMC_NORSRAMDeInit
+                0x080010dc       0x58 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
+                0x080010dc                FSMC_NORSRAMDeInit
  .text.FSMC_NORSRAMInit
-                0x08001130      0x134 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
-                0x08001130                FSMC_NORSRAMInit
+                0x08001134      0x134 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
+                0x08001134                FSMC_NORSRAMInit
  .text.FSMC_NORSRAMCmd
-                0x08001264       0x54 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
-                0x08001264                FSMC_NORSRAMCmd
+                0x08001268       0x54 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
+                0x08001268                FSMC_NORSRAMCmd
  .text.GPIO_DeInit
-                0x080012b8      0x164 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
-                0x080012b8                GPIO_DeInit
+                0x080012bc      0x164 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
+                0x080012bc                GPIO_DeInit
  .text.GPIO_Init
-                0x0800141c      0x11c ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
-                0x0800141c                GPIO_Init
+                0x08001420      0x11c ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
+                0x08001420                GPIO_Init
  .text.GPIO_StructInit
-                0x08001538       0x34 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
-                0x08001538                GPIO_StructInit
+                0x0800153c       0x34 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
+                0x0800153c                GPIO_StructInit
  .text.GPIO_PinAFConfig
-                0x0800156c       0x8c ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
-                0x0800156c                GPIO_PinAFConfig
+                0x08001570       0x8c ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
+                0x08001570                GPIO_PinAFConfig
  .text.RCC_AHB1PeriphClockCmd
-                0x080015f8       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
-                0x080015f8                RCC_AHB1PeriphClockCmd
+                0x080015fc       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
+                0x080015fc                RCC_AHB1PeriphClockCmd
  .text.RCC_AHB3PeriphClockCmd
-                0x08001634       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
-                0x08001634                RCC_AHB3PeriphClockCmd
+                0x08001638       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
+                0x08001638                RCC_AHB3PeriphClockCmd
  .text.RCC_APB2PeriphClockCmd
-                0x08001670       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
-                0x08001670                RCC_APB2PeriphClockCmd
+                0x08001674       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
+                0x08001674                RCC_APB2PeriphClockCmd
  .text.RCC_AHB1PeriphResetCmd
-                0x080016ac       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
-                0x080016ac                RCC_AHB1PeriphResetCmd
+                0x080016b0       0x3c ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
+                0x080016b0                RCC_AHB1PeriphResetCmd
  .text.LCD_FillArea
-                0x080016e8       0x24 ..\Libraries\libsGUI.a(geometry.o)
+                0x080016ec       0x24 ..\Libraries\libsGUI.a(geometry.o)
  .text.LCD_WritePixel
-                0x0800170c       0x28 ..\Libraries\libsGUI.a(geometry.o)
+                0x08001710       0x28 ..\Libraries\libsGUI.a(geometry.o)
  .text.LCD_DrawRectF
-                0x08001734       0x30 ..\Libraries\libsGUI.a(geometry.o)
-                0x08001734                LCD_DrawRectF
+                0x08001738       0x30 ..\Libraries\libsGUI.a(geometry.o)
+                0x08001738                LCD_DrawRectF
  .text.LCD_DrawCircle
-                0x08001764       0x98 ..\Libraries\libsGUI.a(geometry.o)
-                0x08001764                LCD_DrawCircle
+                0x08001768       0x98 ..\Libraries\libsGUI.a(geometry.o)
+                0x08001768                LCD_DrawCircle
  .text.LCD_WriteArea
-                0x080017fc       0x24 ..\Libraries\libsGUI.a(text.o)
+                0x08001800       0x24 ..\Libraries\libsGUI.a(text.o)
  .text.LCD_DrawChar
-                0x08001820      0x110 ..\Libraries\libsGUI.a(text.o)
+                0x08001824      0x110 ..\Libraries\libsGUI.a(text.o)
  .text.LCD_DisplayCharXY
-                0x08001930       0x60 ..\Libraries\libsGUI.a(text.o)
-                0x08001930                LCD_DisplayCharXY
+                0x08001934       0x60 ..\Libraries\libsGUI.a(text.o)
+                0x08001934                LCD_DisplayCharXY
  .text.LCD_DisplayStringXY
-                0x08001990       0x48 ..\Libraries\libsGUI.a(text.o)
-                0x08001990                LCD_DisplayStringXY
- .text.memcpy   0x080019d8       0x16 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/softfp\libc.a(lib_a-memcpy-stub.o)
-                0x080019d8                memcpy
+                0x08001994       0x48 ..\Libraries\libsGUI.a(text.o)
+                0x08001994                LCD_DisplayStringXY
+ .text.memcpy   0x080019dc       0x16 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/../../../../arm-atollic-eabi/lib/armv7e-m/softfp\libc.a(lib_a-memcpy-stub.o)
+                0x080019dc                memcpy
  *(.rodata)
- *fill*         0x080019ee        0x2 
- .rodata        0x080019f0       0x1a src\main.o
- *fill*         0x08001a0a        0x2 
- .rodata        0x08001a0c      0x1a8 ..\Libraries\libBSP.a(carme.o)
+ *fill*         0x080019f2        0x2 
+ .rodata        0x080019f4       0x1a src\main.o
+ *fill*         0x08001a0e        0x2 
+ .rodata        0x08001a10      0x1a8 ..\Libraries\libBSP.a(carme.o)
  *(.rodata*)
  *(.glue_7)
- .glue_7        0x08001bb4        0x0 linker stubs
+ .glue_7        0x08001bb8        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08001bb4        0x0 linker stubs
+ .glue_7t       0x08001bb8        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x08001bb4        0x0 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
+ .eh_frame      0x08001bb8        0x0 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
  *(.init)
- .init          0x08001bb4        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crti.o
-                0x08001bb4                _init
- .init          0x08001bb8        0x8 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtn.o
+ .init          0x08001bb8        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crti.o
+                0x08001bb8                _init
+ .init          0x08001bbc        0x8 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtn.o
  *(.fini)
- .fini          0x08001bc0        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crti.o
-                0x08001bc0                _fini
- .fini          0x08001bc4        0x8 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtn.o
-                0x08001bcc                . = ALIGN (0x4)
-                0x08001bcc                _etext = .
+ .fini          0x08001bc4        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crti.o
+                0x08001bc4                _fini
+ .fini          0x08001bc8        0x8 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtn.o
+                0x08001bd0                . = ALIGN (0x4)
+                0x08001bd0                _etext = .
 
-.vfp11_veneer   0x08001bcc        0x0
- .vfp11_veneer  0x08001bcc        0x0 linker stubs
+.vfp11_veneer   0x08001bd0        0x0
+ .vfp11_veneer  0x08001bd0        0x0 linker stubs
 
-.v4_bx          0x08001bcc        0x0
- .v4_bx         0x08001bcc        0x0 linker stubs
+.v4_bx          0x08001bd0        0x0
+ .v4_bx         0x08001bd0        0x0 linker stubs
 
-.iplt           0x08001bcc        0x0
- .iplt          0x08001bcc        0x0 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
+.iplt           0x08001bd0        0x0
+ .iplt          0x08001bd0        0x0 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
 
-.rel.dyn        0x08001bcc        0x0
- .rel.iplt      0x08001bcc        0x0 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
+.rel.dyn        0x08001bd0        0x0
+ .rel.iplt      0x08001bd0        0x0 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08001bcc        0x0
-                0x08001bcc                __exidx_start = .
+.ARM            0x08001bd0        0x0
+                0x08001bd0                __exidx_start = .
  *(.ARM.exidx*)
-                0x08001bcc                __exidx_end = .
+                0x08001bd0                __exidx_end = .
 
-.preinit_array  0x08001bcc        0x0
-                0x08001bcc                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x08001bd0        0x0
+                0x08001bd0                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x08001bcc                PROVIDE (__preinit_array_end, .)
+                0x08001bd0                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x08001bcc        0x4
-                0x08001bcc                PROVIDE (__init_array_start, .)
+.init_array     0x08001bd0        0x4
+                0x08001bd0                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x08001bcc        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
-                0x08001bd0                PROVIDE (__init_array_end, .)
+ .init_array    0x08001bd0        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
+                0x08001bd4                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08001bd0        0x4
+.fini_array     0x08001bd4        0x4
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08001bd0        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
+ .fini_array    0x08001bd4        0x4 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
                 [!provide]                PROVIDE (__fini_array_end, .)
-                0x08001bd4                _sidata = LOADADDR (.data)
+                0x08001bd8                _sidata = LOADADDR (.data)
 
-.data           0x20000000      0x2a0 load address 0x08001bd4
+.data           0x20000000      0x2a0 load address 0x08001bd8
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -1148,12 +1144,12 @@ LOAD ..\Libraries\libsGUI.a
                 0x20000298                font_5x8
                 0x200002a0                . = ALIGN (0x4)
                 0x200002a0                _edata = .
-                0x08001e74                _siccmram = LOADADDR (.ccmram)
+                0x08001e78                _siccmram = LOADADDR (.ccmram)
 
-.igot.plt       0x200002a0        0x0 load address 0x08001e74
+.igot.plt       0x200002a0        0x0 load address 0x08001e78
  .igot.plt      0x200002a0        0x0 c:/apps/atollic/truestudio for arm 5.5.1/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7e-m/softfp/crtbegin.o
 
-.ccmram         0x10000000        0x0 load address 0x08001e74
+.ccmram         0x10000000        0x0 load address 0x08001e78
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _sccmram = .
  *(.ccmram)
@@ -1172,7 +1168,13 @@ LOAD ..\Libraries\libsGUI.a
                 0x200002bc        0x4 src\main.o
  .bss.continue_cycle
                 0x200002c0        0x1 src\main.o
- *fill*         0x200002c1        0x3 
+ .bss.point_player_r
+                0x200002c1        0x1 src\main.o
+                0x200002c1                point_player_r
+ .bss.point_player_l
+                0x200002c2        0x1 src\main.o
+                0x200002c2                point_player_l
+ *fill*         0x200002c3        0x1 
  .bss.ball_velocity_y
                 0x200002c4        0x4 src\game.o
                 0x200002c4                ball_velocity_y
@@ -1264,43 +1266,43 @@ LOAD ..\Libraries\libsGUI.a
                 0x000003d6       0x37 ..\Libraries\libsGUI.a(font.o)
 OUTPUT(Project_Pong.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x53a6
+.debug_info     0x00000000     0x5370
  .debug_info    0x00000000      0x238 src\stm32f4xx_it.o
  .debug_info    0x00000238       0x59 src\startup.o
- .debug_info    0x00000291      0x7ff src\main.o
- .debug_info    0x00000a90      0x2bf src\game.o
- .debug_info    0x00000d4f       0x5f src\functions.o
- .debug_info    0x00000dae       0x5c src\Switch.o
- .debug_info    0x00000e0a      0x122 src\Draw_display.o
- .debug_info    0x00000f2c      0xae4 ..\Libraries\libBSP.a(can.o)
- .debug_info    0x00001a10      0x695 ..\Libraries\libBSP.a(carme.o)
- .debug_info    0x000020a5      0x5c0 ..\Libraries\libBSP.a(system_stm32f4xx.o)
- .debug_info    0x00002665      0x33c ..\Libraries\libBSP.a(stm32f4xx_exti.o)
- .debug_info    0x000029a1      0x8f9 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
- .debug_info    0x0000329a      0x609 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
- .debug_info    0x000038a3      0xe06 ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
- .debug_info    0x000046a9      0x3bf ..\Libraries\libsGUI.a(geometry.o)
- .debug_info    0x00004a68      0x4ad ..\Libraries\libsGUI.a(text.o)
- .debug_info    0x00004f15      0x491 ..\Libraries\libsGUI.a(font.o)
+ .debug_info    0x00000291      0x7cd src\main.o
+ .debug_info    0x00000a5e      0x2bf src\game.o
+ .debug_info    0x00000d1d       0x5f src\functions.o
+ .debug_info    0x00000d7c       0x5c src\Switch.o
+ .debug_info    0x00000dd8      0x11e src\Draw_display.o
+ .debug_info    0x00000ef6      0xae4 ..\Libraries\libBSP.a(can.o)
+ .debug_info    0x000019da      0x695 ..\Libraries\libBSP.a(carme.o)
+ .debug_info    0x0000206f      0x5c0 ..\Libraries\libBSP.a(system_stm32f4xx.o)
+ .debug_info    0x0000262f      0x33c ..\Libraries\libBSP.a(stm32f4xx_exti.o)
+ .debug_info    0x0000296b      0x8f9 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
+ .debug_info    0x00003264      0x609 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
+ .debug_info    0x0000386d      0xe06 ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
+ .debug_info    0x00004673      0x3bf ..\Libraries\libsGUI.a(geometry.o)
+ .debug_info    0x00004a32      0x4ad ..\Libraries\libsGUI.a(text.o)
+ .debug_info    0x00004edf      0x491 ..\Libraries\libsGUI.a(font.o)
 
-.debug_abbrev   0x00000000     0x1367
+.debug_abbrev   0x00000000     0x1333
  .debug_abbrev  0x00000000      0x108 src\stm32f4xx_it.o
  .debug_abbrev  0x00000108       0x12 src\startup.o
- .debug_abbrev  0x0000011a      0x1ed src\main.o
- .debug_abbrev  0x00000307       0xd9 src\game.o
- .debug_abbrev  0x000003e0       0x14 src\functions.o
- .debug_abbrev  0x000003f4       0x14 src\Switch.o
- .debug_abbrev  0x00000408       0x89 src\Draw_display.o
- .debug_abbrev  0x00000491      0x25e ..\Libraries\libBSP.a(can.o)
- .debug_abbrev  0x000006ef      0x1c0 ..\Libraries\libBSP.a(carme.o)
- .debug_abbrev  0x000008af      0x138 ..\Libraries\libBSP.a(system_stm32f4xx.o)
- .debug_abbrev  0x000009e7      0x1a7 ..\Libraries\libBSP.a(stm32f4xx_exti.o)
- .debug_abbrev  0x00000b8e      0x172 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
- .debug_abbrev  0x00000d00      0x1a5 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
- .debug_abbrev  0x00000ea5      0x1bc ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
- .debug_abbrev  0x00001061       0xbd ..\Libraries\libsGUI.a(geometry.o)
- .debug_abbrev  0x0000111e      0x19f ..\Libraries\libsGUI.a(text.o)
- .debug_abbrev  0x000012bd       0xaa ..\Libraries\libsGUI.a(font.o)
+ .debug_abbrev  0x0000011a      0x1bb src\main.o
+ .debug_abbrev  0x000002d5       0xd9 src\game.o
+ .debug_abbrev  0x000003ae       0x14 src\functions.o
+ .debug_abbrev  0x000003c2       0x14 src\Switch.o
+ .debug_abbrev  0x000003d6       0x87 src\Draw_display.o
+ .debug_abbrev  0x0000045d      0x25e ..\Libraries\libBSP.a(can.o)
+ .debug_abbrev  0x000006bb      0x1c0 ..\Libraries\libBSP.a(carme.o)
+ .debug_abbrev  0x0000087b      0x138 ..\Libraries\libBSP.a(system_stm32f4xx.o)
+ .debug_abbrev  0x000009b3      0x1a7 ..\Libraries\libBSP.a(stm32f4xx_exti.o)
+ .debug_abbrev  0x00000b5a      0x172 ..\Libraries\libBSP.a(stm32f4xx_fsmc.o)
+ .debug_abbrev  0x00000ccc      0x1a5 ..\Libraries\libBSP.a(stm32f4xx_gpio.o)
+ .debug_abbrev  0x00000e71      0x1bc ..\Libraries\libBSP.a(stm32f4xx_rcc.o)
+ .debug_abbrev  0x0000102d       0xbd ..\Libraries\libsGUI.a(geometry.o)
+ .debug_abbrev  0x000010ea      0x19f ..\Libraries\libsGUI.a(text.o)
+ .debug_abbrev  0x00001289       0xaa ..\Libraries\libsGUI.a(font.o)
 
 .debug_aranges  0x00000000      0x6f0
  .debug_aranges
@@ -1376,11 +1378,11 @@ OUTPUT(Project_Pong.elf elf32-littlearm)
 .debug_str      0x00000000     0x2795
  .debug_str     0x00000000      0x299 src\stm32f4xx_it.o
                                 0x2f5 (size before relaxing)
- .debug_str     0x00000299      0x747 src\main.o
-                                0x927 (size before relaxing)
- .debug_str     0x000009e0       0xc2 src\game.o
+ .debug_str     0x00000299      0x735 src\main.o
+                                0x915 (size before relaxing)
+ .debug_str     0x000009ce       0xc7 src\game.o
                                 0x323 (size before relaxing)
- .debug_str     0x00000aa2       0x16 src\Draw_display.o
+ .debug_str     0x00000a95       0x23 src\Draw_display.o
                                 0x24a (size before relaxing)
  .debug_str     0x00000ab8      0x6fa ..\Libraries\libBSP.a(can.o)
                                 0xdb9 (size before relaxing)
