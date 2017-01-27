@@ -19,11 +19,11 @@ Draw_display(unsigned int ball_coordinate_x, unsigned int ball_coordinate_y,
 					{
 							if(i<=0)
 							{
-								LCD_DrawCircle(ball_coordinate_x, ball_coordinate_y, i+BALL_RADIUS, GUI_COLOR_RED);
+								LCD_DrawCircle(ball_coordinate_x+BALL_RADIUS, ball_coordinate_y+BALL_RADIUS, i+BALL_RADIUS, GUI_COLOR_RED);
 							}
 							else
 							{
-								LCD_DrawCircle(ball_coordinate_x, ball_coordinate_y, i+BALL_RADIUS, GUI_COLOR_BLACK);
+								LCD_DrawCircle(ball_coordinate_x+BALL_RADIUS, ball_coordinate_y+BALL_RADIUS, i+BALL_RADIUS, GUI_COLOR_BLACK);
 							}
 							/* Draw left paddle */
 							LCD_DrawRectF(paddle_left_coordinate_x, 0, 										  PADDLE_WIDTH, paddle_left_coordinate_y, 								  GUI_COLOR_BLACK); // overwrite from top to paddle

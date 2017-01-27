@@ -1,0 +1,50 @@
+
+------------------------------------
+  Logging start.  ## CURRENT TIME  : [1/27, 2017   16:18  33.677]  ## COMMAND LINE  : 
+cmd /C "gen_csini.exe"
+------------------------------------
+[STD-IN] : C:\Users\ronbu\Desktop\git\.metadata\.plugins\sst.csgp\bin\env_vars.txt
+GUI is waiting for subprocess to be done...
+Execution done. EXIT CODE = 0
+  Logging finished.  ## CURRENT TIME  : [1/27, 2017   16:18  36.143]
+------------------------------------
+
+------------------------------------
+  Logging start.  ## CURRENT TIME  : [1/27, 2017   16:20  12.348]  ## COMMAND LINE  : 
+cmd /C "gen_csini.exe"
+------------------------------------
+[STD-IN] : C:\Users\ronbu\Desktop\git\.metadata\.plugins\sst.csgp\bin\env_vars.txt
+GUI is waiting for subprocess to be done...
+Execution done. EXIT CODE = 0
+  Logging finished.  ## CURRENT TIME  : [1/27, 2017   16:20  14.840]
+------------------------------------
+
+------------------------------------
+  Logging start.  ## CURRENT TIME  : [1/27, 2017   16:21  6.510]  ## COMMAND LINE  : 
+cmd /C "gen_csini.exe"
+------------------------------------
+[STD-IN] : C:\Users\ronbu\Desktop\git\.metadata\.plugins\sst.csgp\bin\env_vars.txt
+GUI is waiting for subprocess to be done...
+Execution done. EXIT CODE = 0
+  Logging finished.  ## CURRENT TIME  : [1/27, 2017   16:21  9.32]
+------------------------------------
+
+------------------------------------
+  Logging start.  ## CURRENT TIME  : [1/27, 2017   16:23  12.337]  ## COMMAND LINE  : 
+cmd /C "gen_csini.exe"
+------------------------------------
+[STD-IN] : C:\Users\ronbu\Desktop\git\.metadata\.plugins\sst.csgp\bin\env_vars.txt
+GUI is waiting for subprocess to be done...
+Execution done. EXIT CODE = 0
+  Logging finished.  ## CURRENT TIME  : [1/27, 2017   16:23  14.812]
+------------------------------------
+
+------------------------------------
+  Logging start.  ## CURRENT TIME  : [1/27, 2017   16:23  43.722]  ## COMMAND LINE  : 
+cmd /C "gen_csini.exe"
+------------------------------------
+[STD-IN] : C:\Users\ronbu\Desktop\git\.metadata\.plugins\sst.csgp\bin\env_vars.txt
+GUI is waiting for subprocess to be done...
+Execution done. EXIT CODE = 0
+  Logging finished.  ## CURRENT TIME  : [1/27, 2017   16:23  46.143]
+------------------------------------
