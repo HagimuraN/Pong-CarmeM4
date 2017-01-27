@@ -119,25 +119,25 @@ int main(void) {
 
 	myfunction();
 
-
 	for (;;)
 	{
 		i++;
 
-
 		if (Carme_I01_Button_S0()) {
 			LCD_Clear(GUI_COLOR_BLACK);
-			LCD_DisplayStringXY(140, 120, "Spiel Pause");
+			while(Carme_I01_Button_S0()){LCD_DisplayStringXY(140, 120, "Spiel Pause");}
+			LCD_Clear(GUI_COLOR_BLACK);
 		}
 		else{
 			gaming = Game(&ball_coordinate_x, &ball_coordinate_y,
 				 paddle_left_coordinate_x, paddle_left_coordinate_y,
 				 paddle_right_coordinate_x, paddle_right_coordinate_y,
 				 &point_player_r, &point_player_l);
+			save = 0;
+			var= 0;
 
 			if (gaming)
 			{
-				LCD_Clear(GUI_COLOR_BLACK);
 			Draw_display(ball_coordinate_x, ball_coordinate_y,
 					 paddle_left_coordinate_x, paddle_left_coordinate_y,
 					 paddle_right_coordinate_x, paddle_right_coordinate_y);
@@ -145,7 +145,8 @@ int main(void) {
 			else
 			{
 				LCD_Clear(GUI_COLOR_BLACK);
-				LCD_DisplayStringXY(140, 120, "Punkt gemacht");
+				LCD_DisplayStringXY(140, 120, "Punkt gemacht"); //DELAY, dass schrift länger bleibt??
+				LCD_Clear(GUI_COLOR_BLACK);
 			}
 		}
 		WaitCycle();
