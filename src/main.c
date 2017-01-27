@@ -40,6 +40,7 @@
 /*----- Header-Files -------------------------------------------------------*/
 #include <stm32f4xx.h>				/* Processor STM32F407IG				*/
 #include <carme.h>					/* CARME Module							*/
+#include <stdbool.h>
 
 /*----- Macros -------------------------------------------------------------*/
 #define INT_PER_SEC			1000U	/**< SysTick interrupts per second		*/
@@ -109,7 +110,7 @@ int main(void) {
 
 		if (gaming)
 		{
-		Draw_Game(ball_coordinate_x, ball_coordinate_y,
+		Draw_display(ball_coordinate_x, ball_coordinate_y,
 				 paddle_left_coordinate_x, paddle_left_coordinate_y,
 				 paddle_right_coordinate_x, paddle_right_coordinate_y);
 		}

@@ -39,6 +39,7 @@
 /*----- Header-Files -------------------------------------------------------*/
 #include <stm32f4xx.h>				/* Processor STM32F407IG				*/
 #include <carme.h>					/* CARME Module							*/
+#include <stdbool.h>
 
 /*----- Macros -------------------------------------------------------------*/
 
