@@ -154,10 +154,11 @@ void PendSV_Handler(void) {
  * @return		None
  *****************************************************************************
  */
+/*
 void SysTick_Handler(void) {
 	TimingDelay_Decrement();
 }
-
+*/
 /**
  *****************************************************************************
  * @brief		This function handles the EXTI Lines 9:5.

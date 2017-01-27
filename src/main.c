@@ -42,6 +42,7 @@
 #include <carme.h>					/* CARME Module							*/
 #include <stdbool.h>
 
+#include "define.h"
 /*----- Macros -------------------------------------------------------------*/
 #define INT_PER_SEC			1000U	/**< SysTick interrupts per second		*/
 //#define WAIT_CYCLE			10		//Delay after every cycle
@@ -61,7 +62,7 @@ static bool continue_cycle;
 
 unsigned int ball_coordinate_x, ball_coordinate_y;
 unsigned int paddle_left_coordinate_x, paddle_left_coordinate_y;
-unsigned int paddle_right_coordinate_x, paddle_left_coordinate_y;
+unsigned int paddle_right_coordinate_x, paddle_right_coordinate_y;
 unsigned char point_player_r = 0;
 unsigned char point_player_l = 0;
 /*----- Implementation -----------------------------------------------------*/
@@ -117,21 +118,20 @@ int main(void) {
 			LCD_DisplayStringXY(140, 120, "Spiel Pause");
 		}
 		else{
-
-		gaming = Game(&ball_coordinate_x, &ball_coordinate_y,
-			 paddle_left_coordinate_x, paddle_left_coordinate_y,
-			 paddle_right_coordinate_x, paddle_right_coordinate_y);
-
-		if (gaming)
-		{
-		Draw_display(ball_coordinate_x, ball_coordinate_y,
+			gaming = Game(&ball_coordinate_x, &ball_coordinate_y,
 				 paddle_left_coordinate_x, paddle_left_coordinate_y,
 				 paddle_right_coordinate_x, paddle_right_coordinate_y);
-		}
-		else
-		{
-			LCD_DisplayStringXY(140, 120, "Punkt gemacht");
-		}
+
+			if (gaming)
+			{
+			Draw_display(ball_coordinate_x, ball_coordinate_y,
+					 paddle_left_coordinate_x, paddle_left_coordinate_y,
+					 paddle_right_coordinate_x, paddle_right_coordinate_y);
+			}
+			else
+			{
+				LCD_DisplayStringXY(140, 120, "Punkt gemacht");
+			}
 		}
 		WaitCycle();
 
