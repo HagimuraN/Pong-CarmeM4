@@ -44,18 +44,20 @@
 
 /*----- Macros -------------------------------------------------------------*/
 #define INT_PER_SEC			1000U	/**< SysTick interrupts per second		*/
+#define WAIT_CYCLE			10		//Delay after every cycle
 
 /*----- Data types ---------------------------------------------------------*/
 
 /*----- Function prototypes ------------------------------------------------*/
-void Delay(__IO uint32_t nTime);
+void WaitCycle(void);
 void TimingDelay_Decrement(void);
 int main(void);
 
 void myfunction ();
 
 /*----- Data ---------------------------------------------------------------*/
-static __IO uint32_t TimingDelay;
+static __IO uint32_t time_counter;
+static bool continue_cycle;
 
 unsigned int ball_coordinate_x, ball_coordinate_y;
 unsigned int paddle_left_coordinate_x, paddle_left_coordinate_y;
@@ -68,19 +70,24 @@ unsigned char point_player_l = 0;
  *
  * @param[in]	nTime	Time to wait
  */
-void Delay(__IO uint32_t nTime) {
-	TimingDelay = nTime;
-	while (TimingDelay != 0U) {
-	}
+void WaitCycle(void)
+{
+	while (!continue_cycle);
 }
 
 /**
  * @brief		Decrement the TimingDelay. This function is called in the
  *				SysTick_Handler.
  */
-void TimingDelay_Decrement(void) {
-	if (TimingDelay > 0U) {
-		TimingDelay--;
+void SysTick_Handler(void) {
+	if (time_counter < WAIT_CYCLE)
+	{
+		time_counter++;
+		continue_cycle=false;
+	}
+	else
+	{
+		continue_cycle=true;
 	}
 }
 
@@ -118,6 +125,8 @@ int main(void) {
 		{
 
 		}
+
+		WaitCycle();
 	}
 
 
