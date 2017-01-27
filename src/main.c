@@ -41,7 +41,7 @@
 #include <stm32f4xx.h>				/* Processor STM32F407IG				*/
 #include <carme.h>					/* CARME Module							*/
 #include <stdbool.h>
-#include <lcd.h>
+#include <lcd_lld.h>
 #include <carme_io2.h>
 
 #include <stdio.h>
@@ -126,6 +126,7 @@ int main(void) {
 
 
 		if (Carme_I01_Button_S0()) {
+			LCD_Clear(GUI_COLOR_BLACK);
 			LCD_DisplayStringXY(140, 120, "Spiel Pause");
 		}
 		else{
@@ -136,12 +137,14 @@ int main(void) {
 
 			if (gaming)
 			{
+				LCD_Clear(GUI_COLOR_BLACK);
 			Draw_display(ball_coordinate_x, ball_coordinate_y,
 					 paddle_left_coordinate_x, paddle_left_coordinate_y,
 					 paddle_right_coordinate_x, paddle_right_coordinate_y);
 			}
 			else
 			{
+				LCD_Clear(GUI_COLOR_BLACK);
 				LCD_DisplayStringXY(140, 120, "Punkt gemacht");
 			}
 		}
