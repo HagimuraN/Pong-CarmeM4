@@ -107,9 +107,16 @@ int main(void) {
 
 	myfunction();
 
+
 	for (;;)
 	{
 		i++;
+
+
+		if (Carme_I01_Button_S0()) {
+			LCD_DisplayStringXY(140, 120, "Spiel Pause");
+		}
+		else{
 
 		gaming = Game(&ball_coordinate_x, &ball_coordinate_y,
 			 paddle_left_coordinate_x, paddle_left_coordinate_y,
@@ -123,12 +130,12 @@ int main(void) {
 		}
 		else
 		{
-
+			LCD_DisplayStringXY(140, 120, "Punkt gemacht");
 		}
-
+		}
 		WaitCycle();
-	}
 
+	}
 
 	return 0U;
 }
