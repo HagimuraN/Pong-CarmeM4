@@ -114,6 +114,8 @@ int main(void) {
 		while (1) {
 		}
 	}
+	LCD_Init();
+	CARME_IO2_Init();
 
 	myfunction();
 
