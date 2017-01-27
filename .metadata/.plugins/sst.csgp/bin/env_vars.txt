@@ -1,0 +1,4 @@
+C:\Apps\Atollic\TrueSTUDIO for ARM Pro 5.3.0\ide\plugins\sst.tm_1.1.2.201408221116\CSHOME\
+C:\Apps\Atollic\TrueSTUDIO for ARM Pro 5.3.0\ide\plugins\sst.csgp_1.0.5.201408221116\CSHOME
+C:\Apps\Atollic\TrueSTUDIO for ARM Pro 5.3.0\ARMTools
+C:\Users\ronbu\Desktop\git\.metadata\.plugins\sst.tm
