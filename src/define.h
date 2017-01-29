@@ -1,5 +1,5 @@
 #define BALL_VELOCITY 320		//Velocity of the ball in pixels per seconds
-#define WAIT_CYCLE 10
+#define WAIT_CYCLE 10			//time to wait in ms
 #define TIMESCALE 1/BALL_VELOCITY
 
 #define BALL_WIDTH 10

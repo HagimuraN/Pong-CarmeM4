@@ -105,6 +105,7 @@ void SysTick_Handler(void) {
 	else
 	{
 		continue_cycle=true;
+		time_counter=0;
 	}
 }
 
@@ -120,9 +121,8 @@ int main(void) {
 	uint8_t i = 0U;
 	char text[50];
 
-	if (SysTick_Config(SystemCoreClock / INT_PER_SEC) == 1U) {
-		while (1) {
-		}
+	if (SysTick_Config(SystemCoreClock / INT_PER_SEC)) {
+		while (1);
 	}
 
 	LCD_Init();
