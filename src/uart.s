@@ -16,10 +16,10 @@ RECEIVE_BUFFER:		  .space 6*2, 0x00	//All received data are temporarely stored h
 
 //Konstanten
 //RCC Registers
-.set RCC_BASE_ADDR,  0x40023C00
+.set RCC_BASE_ADDR,  0x40023800
 .set OFFSET_APB2ENR, 0x44
 //UART1 Registers
-.set USART1_BASE_ADDR, 0x400113FF
+.set USART1_BASE_ADDR, 0x40011000
 .set OFFSET_ADDR_DATA, 0x04
 .set OFFSET_ADDR_BAUD, 0x08
 .set OFFSET_ADDR_CR1, 0x0C
@@ -29,7 +29,7 @@ RECEIVE_BUFFER:		  .space 6*2, 0x00	//All received data are temporarely stored h
 .set NVIC_ISER_1, 0xE000E104
 
 .set DIV_Manzisse, 91
-.set DIV_Frak, 2
+.set DIV_Frak, 1
 
 .global usart_init
 .section .text.init
@@ -48,14 +48,14 @@ usart_init:
 	LDR r0, =(USART1_BASE_ADDR+OFFSET_ADDR_BAUD) //load register address
 	MOV r1, #(DIV_Manzisse*2*4)		//Baudrate of 115200
 	ORR r1, r1, #DIV_Frak
-	STR r1, [r0]						//write in baud rate register
+	STRH r1, [r0]						//write in baud rate register (0x2D9)
 
 	//Enable RXNE interrupt by setting RXNEIE
 	//set TE to enable transmission
 	//set RE to enable reception
 	LDR r0, =(USART1_BASE_ADDR+OFFSET_ADDR_CR1)
-	LDR r1, =0x0026
-	STR r1, [r0]
+	LDR r1, =0x002C
+	STRH r1, [r0]
 
 /*
 	//Clock-Enable and enable clock for the last bit.
@@ -72,7 +72,7 @@ usart_init:
 	LDR r0, =(USART1_BASE_ADDR+OFFSET_ADDR_CR1)
 	LDR r1, [r0]
 	ORR r1, r1, #(1<<13)
-	STR r1, [r0]
+	STRH r1, [r0]
 
 
 	//Enable UART interrupt in NVIC
@@ -102,21 +102,22 @@ uart_send:
 	ADD		r4, #4*6					//store the end of COORDINATE_ADDRESSES in r4
 	loop:
 		LDR r1, [r6], #4	//Load Data in Addres r6 to r1, then increment r6 by four to get to the next address data
+		LDR	r2, [r3]		//clear TC flag
 		STRB r1, [r0]		//Write out to UART1
 		wait1:		//Wait for first Byte of 16 bit int variable to send (LSB first)
 			LDR r2, [r3]
-			AND r2, r2, #0x8	//Filter out TXE bit
-			CMP r2, #0x8		//look if 0x8-bit(TXE-bit) is set
-			BNE wait1
+			AND r2, r2, #0x80	//Filter out TXE bit
+			CMP r2, #0
+			BEQ wait1
 
 		LSR r1, #8		//Shift the Data-Register, so that it can send upper 8-bit of int
-		LDR r1, [r6], #1	//Load Data in Addres r6 to r1, then increment Address r6 by one
+		//LDR r1, [r6], #1	//Load Data in Addres r6 to r1, then increment Address r6 by one
 		STRB r1, [r0]		//Write out to UART1
 		wait2:		//Wait for the sencond Byte of 16 bit int variable to send (MSB)
 			LDR r2, [r3]
-			AND r2, r2, #0x8	//Filter out TXE bit
-			CMP r2, #0x8		//look if 0x8-bit(TXE-bit) is set
-			BNE wait2
+			AND r2, r2, #0x80	//Filter out TXE bit
+			CMP r2, #0
+			BEQ wait2
 
 
 		CMP r6, r4	//loop until all coordinates are written out
@@ -128,23 +129,24 @@ send_paddle_pos:	//only send paddle position (2nd player modus)
 
 	LDR 	r1, =(USART1_BASE_ADDR+OFFSET_ADDR_DATA)	//USART Data Register
 	LDR		r3, =(USART1_BASE_ADDR)		//USART Status Register
-	LDR		r0, [r0]		//load input data
+//	LDR		r0, [r0]		//load input data
 
+	LDR	r2, [r3]		//clear TC flag
 	STRB r0, [r1]		//Write out to UART1
 	wait_1:		//Wait for first Byte of 16 bit int variable to send (LSB first)
 		LDR r2, [r3]
-		AND r2, r2, #0x8	//Filter out TXE bit
-		CMP r2, #0x8		//look if 0x8-bit(TXE-bit) is set
-		BNE wait_1
+		AND r2, r2, #0x80	//Filter out TXE bit
+		CMP r2, #0
+		BEQ wait_1
 
 	LSR r1, #8		//Shift the Data-Register, so that it can send upper 8-bit of int
-	LDR r1, [r6], #1	//Load Data in Addres r6 to r1, then increment Address r6 by one
+//	LDR r1, [r6], #1	//Load Data in Addres r6 to r1, then increment Address r6 by one
 	STRB r1, [r0]		//Write out to UART1
 	wait_2:		//Wait for the sencond Byte of 16 bit int variable to send (MSB)
 		LDR r2, [r3]
-		AND r2, r2, #0x8	//Filter out TXE bit
-		CMP r2, #0x8		//look if 0x8-bit(TXE-bit) is set
-		BNE wait_2
+		AND r2, r2, #0x80	//Filter out TXE bit
+		CMP r2, #0
+		BEQ wait_2
 
 	mov 	pc,lr
 
@@ -152,6 +154,7 @@ send_paddle_pos:	//only send paddle position (2nd player modus)
 //Read received Data from Buffer
 .global uart_receive
 .section .text.receive
+uart_receive:
 //First read mode to determine what data is stored in buffer
 	LDR		r4, =receive_mode
 	CMP		r4, #1
@@ -201,9 +204,9 @@ read_paddle:
 
 	BX		LR
 
-uart_receive:
+
 .section	.data.USART1_IRQHandler_data
-buffer_index:	.byte	0x00
+	buffer_index:	.byte	0x00
 
 //Data will be saved on Buffer on interrupt
 .section	.text.USART1_IRQHandler
@@ -213,7 +216,7 @@ USART1_IRQHandler:
 	LDR		r0, =USART1_BASE_ADDR
 	LDR		r1, [r0]			//Load status register to check the receive flag
 	AND		r1, r1, #(1<<5)
-	CMP		r1, #1				//Check if the Flag is set
+	CMP		r1, #(1<<5)				//Check if the Flag is set
 	BNE		exit				//ignore if not
 
 	LDR		r0, =receive_mode	//Check receive modus to check how many Bytes to place on Buffer

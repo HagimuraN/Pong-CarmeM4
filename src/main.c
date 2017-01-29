@@ -43,6 +43,7 @@
 #include <stdbool.h>
 #include <lcd.h>
 #include <carme_io2.h>
+#include <carme_io1.h>
 
 #include <stdio.h>
 #include <stdint.h>
@@ -69,11 +70,11 @@ void TimingDelay_Decrement(void);
 int main(void);
 
 void myfunction ();
-int Carme_I01_Button_S0();
 
 /*----- Data ---------------------------------------------------------------*/
 static __IO uint32_t time_counter;
 static bool continue_cycle;
+static uint8_t button_value;
 
 unsigned int ball_coordinate_x, ball_coordinate_y;
 unsigned int paddle_left_coordinate_x, paddle_left_coordinate_y;
@@ -115,7 +116,7 @@ int main(void) {
 	bool gaming;	//current game mode
 	bool receive_mode = FIRST_PLAYER;
 	unsigned int time_counter;
-	unsigned int pot_value;
+	uint16_t pot_value;
 	uint8_t i = 0U;
 	char text[50];
 
@@ -125,30 +126,34 @@ int main(void) {
 	}
 
 	LCD_Init();
+	CARME_IO1_Init();
 	CARME_IO2_Init();
 	Uart_IO_Init();
 	usart_init(receive_mode);
 	paddle_left_coordinate_x=0;				//position paddle
-	paddle_right_coordinate_x=(DISP_WIDTH-PADDLE_WIDTH);
+	paddle_right_coordinate_x=(DISP_WIDTH-PADDLE_WIDTH-1);
 	ball_coordinate_x=(DISP_WIDTH/2);		//place the ball in middle
 	ball_coordinate_y=(DISP_HEIGHT/2);
 	myfunction();
+
 
 	if (receive_mode == FIRST_PLAYER)
 	{
 		for (;;)		//Routine for Player1
 		{
 			i++;
+			CARME_IO1_BUTTON_Get(&button_value);
+
 
 			/* Read the value from the potentiometer */
 			CARME_IO2_ADC_Get (CARME_IO2_ADC_PORT0, &pot_value);
 			pot_value &= 0x03FF;
 			pot_value /= 4;	//turn into 8bit
-			paddle_left_coordinate_y=(pot_value/POT_UPPER_LIMIT)*(DISP_HEIGHT-PADDLE_HEIGHT);	//scale the pot-value into paddle value
+			paddle_left_coordinate_y=((float)pot_value/POT_UPPER_LIMIT)*(DISP_HEIGHT-PADDLE_HEIGHT);	//scale the pot-value into paddle value
 
-			if (Carme_I01_Button_S0()) {										//Pause the game while pushing on button
+			if (button_value &= 0x01) {										//Pause the game while pushing on button
 				LCD_Clear(GUI_COLOR_BLACK);
-				while(Carme_I01_Button_S0()){LCD_DisplayStringXY(140, 120, "Spiel Pause");}
+				while(button_value &= 0x01){LCD_DisplayStringXY(140, 120, "Spiel Pause");}
 				LCD_Clear(GUI_COLOR_BLACK);
 			}
 			else{
@@ -199,10 +204,10 @@ int main(void) {
 				}
 			}
 
-			uart_send(&ball_coordinate_x, &ball_coordinate_y,						//send the coordinates
-					  &paddle_left_coordinate_x, &paddle_left_coordinate_y,
-					  &paddle_right_coordinate_x, &paddle_right_coordinate_y);
-			uart_receive(&paddle_right_coordinate_y);	//Read potmeter coordinate of the second player
+			uart_send(ball_coordinate_x, ball_coordinate_y,						//send the coordinates
+					  paddle_left_coordinate_x, paddle_left_coordinate_y,
+					  paddle_right_coordinate_x, paddle_right_coordinate_y);
+			uart_receive(paddle_right_coordinate_y);	//Read potmeter coordinate of the second player
 			WaitCycle();
 		}
 
@@ -222,10 +227,10 @@ int main(void) {
 					 	 paddle_left_coordinate_x, paddle_left_coordinate_y,
 					 	 paddle_right_coordinate_x, paddle_right_coordinate_y);	//Draw the Game
 
-			uart_send(&paddle_right_coordinate_y);
-			uart_receive(&ball_coordinate_x, &ball_coordinate_y,
-						 &paddle_left_coordinate_x, &paddle_left_coordinate_y,
-						 &paddle_right_coordinate_x, &paddle_right_coordinate_y);
+			uart_send(paddle_right_coordinate_y);
+			uart_receive(ball_coordinate_x, ball_coordinate_y,
+						 paddle_left_coordinate_x, paddle_left_coordinate_y,
+						 paddle_right_coordinate_x, paddle_right_coordinate_y);
 		}
 	}
 
