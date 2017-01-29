@@ -113,68 +113,124 @@ void SysTick_Handler(void) {
  */
 int main(void) {
 	bool gaming;	//current game mode
+	bool receive_mode = FIRST_PLAYER;
 	unsigned int time_counter;
-
+	unsigned int pot_value;
 	uint8_t i = 0U;
+	char text[50];
 
 	if (SysTick_Config(SystemCoreClock / INT_PER_SEC) == 1U) {
 		while (1) {
 		}
 	}
+
 	LCD_Init();
 	CARME_IO2_Init();
 	Uart_IO_Init();
-	usart_init(1);
-	uart_send(ball_coordinate_x, ball_coordinate_y,
-		paddle_left_coordinate_x, paddle_left_coordinate_y,
-		paddle_right_coordinate_x, paddle_right_coordinate_y);
-
-	uart_receive(paddle_right_coordinate_y);
+	usart_init(receive_mode);
+	paddle_left_coordinate_x=0;				//position paddle
+	paddle_right_coordinate_x=(DISP_WIDTH-PADDLE_WIDTH);
+	ball_coordinate_x=(DISP_WIDTH/2);		//place the ball in middle
+	ball_coordinate_y=(DISP_HEIGHT/2);
 	myfunction();
 
-	for (;;)
+	if (receive_mode == FIRST_PLAYER)
 	{
-		i++;
+		for (;;)		//Routine for Player1
+		{
+			i++;
 
-		if (Carme_I01_Button_S0()) {
-			LCD_Clear(GUI_COLOR_BLACK);
-			while(Carme_I01_Button_S0()){LCD_DisplayStringXY(140, 120, "Spiel Pause");}
-			LCD_Clear(GUI_COLOR_BLACK);
-		}
-		else{
-			gaming = Game(&ball_coordinate_x, &ball_coordinate_y,
-				 paddle_left_coordinate_x, paddle_left_coordinate_y,
-				 paddle_right_coordinate_x, paddle_right_coordinate_y,
-				 &point_player_r, &point_player_l);
+			/* Read the value from the potentiometer */
+			CARME_IO2_ADC_Get (CARME_IO2_ADC_PORT0, &pot_value);
+			pot_value &= 0x03FF;
+			pot_value /= 4;	//turn into 8bit
+			paddle_left_coordinate_y=(pot_value/POT_UPPER_LIMIT)*(DISP_HEIGHT-PADDLE_HEIGHT);	//scale the pot-value into paddle value
 
-			if (gaming)
-			{
-			Draw_display(ball_coordinate_x, ball_coordinate_y,
-					 paddle_left_coordinate_x, paddle_left_coordinate_y,
-					 paddle_right_coordinate_x, paddle_right_coordinate_y);
+			if (Carme_I01_Button_S0()) {										//Pause the game while pushing on button
+				LCD_Clear(GUI_COLOR_BLACK);
+				while(Carme_I01_Button_S0()){LCD_DisplayStringXY(140, 120, "Spiel Pause");}
+				LCD_Clear(GUI_COLOR_BLACK);
 			}
-			else
-			{
-				if (time_counter <= 500)	//Display for 5s
+			else{
+				if (gaming)
 				{
-					LCD_DisplayStringXY(140, 120, "Punkt gemacht"); //DELAY, dass schrift länger bleibt??
-					time_counter++;
+				gaming = Game(&ball_coordinate_x, &ball_coordinate_y,
+					 paddle_left_coordinate_x, paddle_left_coordinate_y,
+					 paddle_right_coordinate_x, paddle_right_coordinate_y,
+					 &point_player_r, &point_player_l);							//execute the game and save the status in variable gaming
+
+				Draw_display(ball_coordinate_x, ball_coordinate_y,
+						 paddle_left_coordinate_x, paddle_left_coordinate_y,
+						 paddle_right_coordinate_x, paddle_right_coordinate_y);	//Draw the Game
 				}
 				else
 				{
-					gaming = true;
-					time_counter = 0;
-					LCD_Clear(GUI_COLOR_BLACK);
+					if (time_counter <= 500)	//Display for 5s				//If someone makes a point, show "Punkt gemacht" for 5s
+					{
+						if (point_player_r >= POINTS_TO_WIN)
+						{
+							sprintf(text, "Player2 gewinnt mit %d - %d", point_player_l, point_player_r);
+							LCD_DisplayStringXY(140, 120, text);
+						}
+						else if (point_player_l >= POINTS_TO_WIN)
+						{
+							sprintf(text, "Player1 gewinnt mit %d - %d", point_player_l, point_player_r);
+							LCD_DisplayStringXY(140, 120, text);
+						}
+						else
+						{
+							sprintf(text, "Punkt gemacht %d - %d", point_player_l, point_player_r);
+							LCD_DisplayStringXY(140, 120, text); //DELAY, dass schrift länger bleibt??
+						}
+
+						time_counter++;
+					}
+					else
+					{
+						if (point_player_r >= POINTS_TO_WIN || point_player_l >= POINTS_TO_WIN)
+						{
+							point_player_r = 0;
+							point_player_l = 0;
+						}
+						gaming = true;
+						time_counter = 0;
+						LCD_Clear(GUI_COLOR_BLACK);
+					}
 				}
 			}
-		}
-		WaitCycle();
 
+			uart_send(&ball_coordinate_x, &ball_coordinate_y,						//send the coordinates
+					  &paddle_left_coordinate_x, &paddle_left_coordinate_y,
+					  &paddle_right_coordinate_x, &paddle_right_coordinate_y);
+			uart_receive(&paddle_right_coordinate_y);	//Read potmeter coordinate of the second player
+			WaitCycle();
+		}
+
+
+	}
+	else
+	{
+		for(;;)		//Routine for second player
+		{
+			/* Read the value from the potentiometer */
+			CARME_IO2_ADC_Get (CARME_IO2_ADC_PORT0, &pot_value);
+			pot_value &= 0x03FF;
+			pot_value /= 4;		//Turn into 8-bit
+			paddle_right_coordinate_y=(pot_value/0xFF)*(DISP_HEIGHT-PADDLE_HEIGHT);	//scale the pot-value into paddle value
+
+			Draw_display(ball_coordinate_x, ball_coordinate_y,
+					 	 paddle_left_coordinate_x, paddle_left_coordinate_y,
+					 	 paddle_right_coordinate_x, paddle_right_coordinate_y);	//Draw the Game
+
+			uart_send(&paddle_right_coordinate_y);
+			uart_receive(&ball_coordinate_x, &ball_coordinate_y,
+						 &paddle_left_coordinate_x, &paddle_left_coordinate_y,
+						 &paddle_right_coordinate_x, &paddle_right_coordinate_y);
+		}
 	}
 
 	return 0U;
 }
-
 /**
  * @}
  */

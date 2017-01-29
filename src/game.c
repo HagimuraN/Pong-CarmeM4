@@ -68,26 +68,21 @@ bool Game (unsigned int *ball_coordinate_x, unsigned int *ball_coordinate_y,
 {	
 	static bool gaming = true;						//it is true while the game is running
 	//static bool ball_coordinate_changed = false;	//indicates wether or not the coordinate of the all has changed
+
+
 	
-	if (gaming)
+	if (Move_Ball(ball_coordinate_x, ball_coordinate_y))
 	{
-		if (Move_Ball(&ball_coordinate_x, &ball_coordinate_y))
-		{
-			Paddle_Bounce_Detection(ball_coordinate_x, ball_coordinate_y,
-					   paddle_left_coordinate_x, paddle_left_coordinate_y,
-					   paddle_right_coordinate_x, paddle_right_coordinate_y);
-		
-			Change_Y_Velocity(ball_coordinate_y, ball_coordinate_y);
-		}
-		if (Point_Detection(ball_coordinate_x, ball_coordinate_y,
-							&point_player_r, &point_player_l))
-			gaming = false;
+		Paddle_Bounce_Detection(*ball_coordinate_x, *ball_coordinate_y,
+				   paddle_left_coordinate_x, paddle_left_coordinate_y,
+				   paddle_right_coordinate_x, paddle_right_coordinate_y);
+
+		Change_Y_Velocity(*ball_coordinate_y, *ball_coordinate_y);
 	}
-	else
-	{
-		//wait a moment when someone scores a point
-;		//display the current points of the players
-	}
+	if (Point_Detection(*ball_coordinate_x, *ball_coordinate_y,
+						point_player_r, point_player_l))
+		gaming = false;
+
 
 	return gaming;	//return the current game mode
 }

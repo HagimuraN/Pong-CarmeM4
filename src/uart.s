@@ -128,6 +128,7 @@ send_paddle_pos:	//only send paddle position (2nd player modus)
 
 	LDR 	r1, =(USART1_BASE_ADDR+OFFSET_ADDR_DATA)	//USART Data Register
 	LDR		r3, =(USART1_BASE_ADDR)		//USART Status Register
+	LDR		r0, [r0]		//load input data
 
 	STRB r0, [r1]		//Write out to UART1
 	wait_1:		//Wait for first Byte of 16 bit int variable to send (LSB first)
