@@ -3,7 +3,7 @@
 #include <carme_io1.h>
 #include <carme_io2.h>
 #include <uart.h>
-#include <define.h>
+#include "define.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

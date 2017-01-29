@@ -41,16 +41,22 @@
 #include <stm32f4xx.h>				/* Processor STM32F407IG				*/
 #include <carme.h>					/* CARME Module							*/
 #include <stdbool.h>
-#include <lcd_lld.h>
+#include <lcd.h>
 #include <carme_io2.h>
 
 #include <stdio.h>
+#include <stdint.h>
 #include <string.h>
-
+#include <stdlib.h>
+//#include <color.h>
 
 #include "define.h"
 #include "Draw_display.h"
 #include "game.h"
+#include "uart_io_init.h"
+#include "uart_io_init.h"
+#include "uart.h"
+
 /*----- Macros -------------------------------------------------------------*/
 #define INT_PER_SEC			1000U	/**< SysTick interrupts per second		*/
 //#define WAIT_CYCLE			10		//Delay after every cycle
@@ -107,6 +113,7 @@ void SysTick_Handler(void) {
  */
 int main(void) {
 	bool gaming;	//current game mode
+	unsigned int time_counter;
 
 	uint8_t i = 0U;
 
@@ -116,7 +123,13 @@ int main(void) {
 	}
 	LCD_Init();
 	CARME_IO2_Init();
+	Uart_IO_Init();
+	usart_init(1);
+	uart_send(ball_coordinate_x, ball_coordinate_y,
+		paddle_left_coordinate_x, paddle_left_coordinate_y,
+		paddle_right_coordinate_x, paddle_right_coordinate_y);
 
+	uart_receive(paddle_right_coordinate_y);
 	myfunction();
 
 	for (;;)
@@ -133,8 +146,6 @@ int main(void) {
 				 paddle_left_coordinate_x, paddle_left_coordinate_y,
 				 paddle_right_coordinate_x, paddle_right_coordinate_y,
 				 &point_player_r, &point_player_l);
-			save = 0;
-			var= 0;
 
 			if (gaming)
 			{
@@ -144,9 +155,17 @@ int main(void) {
 			}
 			else
 			{
-				LCD_Clear(GUI_COLOR_BLACK);
-				LCD_DisplayStringXY(140, 120, "Punkt gemacht"); //DELAY, dass schrift länger bleibt??
-				LCD_Clear(GUI_COLOR_BLACK);
+				if (time_counter <= 500)	//Display for 5s
+				{
+					LCD_DisplayStringXY(140, 120, "Punkt gemacht"); //DELAY, dass schrift länger bleibt??
+					time_counter++;
+				}
+				else
+				{
+					gaming = true;
+					time_counter = 0;
+					LCD_Clear(GUI_COLOR_BLACK);
+				}
 			}
 		}
 		WaitCycle();
